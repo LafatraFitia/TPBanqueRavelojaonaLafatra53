@@ -73,6 +73,15 @@ public class GestionnaireCompte {
     public CompteBancaire getCompteById(Long id) {
         return em.find(CompteBancaire.class, id);
     }
+    
+    public double getMontantById(Long id) {
+        CompteBancaire compte = getCompteById(id);
+        if (compte != null) {
+            return compte.getSolde();
+        } else {
+            return -1; 
+        }
+    }
 
     /**
      * Creates a new instance of GestionnaireCompte

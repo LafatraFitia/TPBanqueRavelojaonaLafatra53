@@ -5,12 +5,16 @@
 package com.mycompany.tpbanqueravelojaonalafatra53.jsf;
 
 import com.mycompany.tpbanqueravelojaonalafatra53.entity.CompteBancaire;
+import com.mycompany.tpbanqueravelojaonalafatra53.jsf.util.Util;
 import com.mycompany.tpbanqueravelojaonalafatra53.service.GestionnaireCompte;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,9 +23,10 @@ import java.io.Serializable;
 @Named(value = "transfer")
 @RequestScoped
 public class Transfer implements Serializable {
+
     @Inject
     private GestionnaireCompte gestionnaireCompte;
-    
+
     private Long idSource;
     private Long idDestination;
     private int montant;
@@ -50,7 +55,6 @@ public class Transfer implements Serializable {
         this.idDestination = idDestination;
     }
 
-   
     public int getMontant() {
         return montant;
     }
@@ -64,13 +68,42 @@ public class Transfer implements Serializable {
      */
     public Transfer() {
     }
-    
-    public String transfer(){
-        //gestionnaireCompte.transferer(idSource, idDestinataire, montant);
+
+    public String transfer() {
         CompteBancaire source = gestionnaireCompte.getCompteById(idSource);
         CompteBancaire destination = gestionnaireCompte.getCompteById(idDestination);
+        ArrayList<String> erreurs = new ArrayList<>();
+        if (source == null) {
+            //Util.messageErreur("Le compte source n'existe pas", "Le compte source n'existe pas");
+            //return null;
+            erreurs.add("Le compte source n'existe pas");
+        }
+        if (destination == null) {
+            //Util.messageErreur("Le compte destination n'existe pas", "Le compte destination n'existe pas");
+            //return null;
+            erreurs.add("Le compte destination n'existe pas");
+
+        }
+
+        double montantSource = gestionnaireCompte.getMontantById(idSource);
+        if (montantSource < montant) {
+            //Util.messageErreur("Le compte source n'a pas assez d'argent", "Le compte source n'a pas assez d'argent");
+            //return null;
+            erreurs.add("Le compte source n'a pas assez d'argent");
+
+        }
+
+        if (!erreurs.isEmpty()) {
+            for (String erreur : erreurs) {
+                Util.messageErreur(erreur, erreur);
+            }
+            return null;
+        }
         gestionnaireCompte.transferer(source, destination, montant);
+        
+        Util.messageErreur("transfert reussi", "transfert reussi");
+
         return "listeComptes";
     }
-    
+
 }
