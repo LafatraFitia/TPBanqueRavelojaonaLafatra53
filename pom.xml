@@ -19,6 +19,13 @@
             <version>${jakartaee}</version>
             <scope>provided</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>14.0.0-RC2</version>
+            <classifier>jakarta</classifier>
+        </dependency>
     </dependencies>
     
     <build>
@@ -39,4 +46,5 @@
             </plugin>
         </plugins>
     </build>
+    
 </project>
