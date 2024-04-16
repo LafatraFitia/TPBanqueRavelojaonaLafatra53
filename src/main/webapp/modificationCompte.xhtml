@@ -13,6 +13,7 @@
                     <f:viewParam name="id" value="#{modificationCompte.id}"  
                                  required="true"/>  
                     <f:viewAction action="#{modificationCompte.loadCompte}"/>  
+                    <f:viewAction action="#{modificationCompte.loadName()}"/>  
                 </f:metadata>
             </ui:define>
 
@@ -21,6 +22,7 @@
             </ui:define>
 
             <ui:define name="content">
+                <h1>Modification du nom #{modificationCompte.nom}</h1>
                 <h:form id="form">
                     <h:panelGrid columns="3">
                         Nom : 

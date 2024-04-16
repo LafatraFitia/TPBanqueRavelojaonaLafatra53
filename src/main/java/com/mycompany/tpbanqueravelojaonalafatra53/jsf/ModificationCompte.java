@@ -64,6 +64,12 @@ public class ModificationCompte implements Serializable {
         compte = gestionnaireCompte.getCompteById(id);
     }
 
+    public void loadName() {
+        if(compte == null) {
+            loadCompte();
+        }
+        nom = compte.getNom();
+    }
     /**
      * Creates a new instance of ModificationCompte
      */
