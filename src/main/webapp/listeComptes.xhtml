@@ -32,18 +32,28 @@
                         <h:outputText value="#{compte.solde}" />
                     </p:column>
 
-                    
+
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Opérations"/>
                         </f:facet>
                         <h:form>
                             <h:commandLink action="#{listeComptes.supprimerCompte(compte)}"
-                                       title="Supprimer le compte de #{compte.nom}" >
-                            <h:graphicImage name="images/del.png" width="50px" height="50px" />
-                        </h:commandLink>
+                                           title="Supprimer le compte de #{compte.nom}" >
+                                <h:graphicImage name="images/del.png" width="50px" height="50px" />
+                            </h:commandLink>
                         </h:form>
-                        
+
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Modification"/>
+                        </f:facet>
+                        <h:outputLink value="modificationCompte.xhtml?id=#{compte.id}"
+                                      title="Modifier le compte #{compte.nom}">
+                            <h:graphicImage name="images/edit.png" width="50px"/>
+                        </h:outputLink>
                     </p:column>
 
                 </p:dataTable>

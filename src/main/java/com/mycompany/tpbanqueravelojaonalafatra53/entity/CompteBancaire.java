@@ -17,6 +17,10 @@ import java.io.Serializable;
 @Entity
 public class CompteBancaire implements Serializable {
 
+    public CompteBancaire(String nom) {
+        this.nom = nom;
+    }
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
