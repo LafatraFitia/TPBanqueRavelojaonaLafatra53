@@ -16,8 +16,12 @@
 
             <ui:define name="content">
                 <p:dataTable var="compte" value="#{listeComptes.allComptes}">
-                    <p:column headerText="Id">
-                        <h:outputText value="#{compte.id}" />
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id"/>
+                        </f:facet>
+                        <h:link outcome="mouvement?id=#{compte.id}" 
+                                value="#{compte.id}"/>
                     </p:column>
 
                     <p:column headerText="Nom">
