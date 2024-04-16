@@ -7,7 +7,6 @@ package com.mycompany.tpbanqueravelojaonalafatra53.service;
 import com.mycompany.tpbanqueravelojaonalafatra53.entity.CompteBancaire;
 import jakarta.annotation.sql.DataSourceDefinition;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -93,6 +92,12 @@ public class GestionnaireCompte {
     public void retirer(CompteBancaire compteBancaire, int montant) {
         compteBancaire.retirer(montant);
         update(compteBancaire);
+    }
+
+    @Transactional
+    public void supprimerCompte(CompteBancaire compte) {
+        System.out.println(compte);
+        em.remove(em.merge(compte));
     }
 
     /**

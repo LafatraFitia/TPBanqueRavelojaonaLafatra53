@@ -5,13 +5,13 @@
 package com.mycompany.tpbanqueravelojaonalafatra53.jsf;
 
 import com.mycompany.tpbanqueravelojaonalafatra53.entity.CompteBancaire;
+import com.mycompany.tpbanqueravelojaonalafatra53.jsf.util.Util;
 import com.mycompany.tpbanqueravelojaonalafatra53.service.GestionnaireCompte;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -41,6 +41,13 @@ public class ListeComptes {
             allComptes = gestionnaireCompte.getAllComptes();
         }
         return allComptes;
+    }
+
+    public String supprimerCompte(CompteBancaire compteBancaire) {
+        System.out.println("----------- com.mycompany.tpbanqueravelojaonalafatra53.jsf.ListeComptes.supprimerCompte()");
+        gestionnaireCompte.supprimerCompte(compteBancaire);
+        Util.addFlashInfoMessage("Compte de " + compteBancaire.getNom() + " supprimé");
+        return "listeComptes?faces-redirect=true";
     }
 
 }

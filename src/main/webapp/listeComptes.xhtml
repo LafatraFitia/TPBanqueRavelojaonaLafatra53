@@ -32,6 +32,20 @@
                         <h:outputText value="#{compte.solde}" />
                     </p:column>
 
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Opérations"/>
+                        </f:facet>
+                        <h:form>
+                            <h:commandLink action="#{listeComptes.supprimerCompte(compte)}"
+                                       title="Supprimer le compte de #{compte.nom}" >
+                            <h:graphicImage name="images/del.png" width="50px" height="50px" />
+                        </h:commandLink>
+                        </h:form>
+                        
+                    </p:column>
+
                 </p:dataTable>
             </ui:define>
 
